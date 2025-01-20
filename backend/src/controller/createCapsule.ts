@@ -4,17 +4,19 @@ import { userModel } from "../models/user";
 import { capsuleModel } from "../models/capsule";
 import { JwtPayload } from "jsonwebtoken";
 
+
 export interface RequestWithUser extends Request {
   userEmail: string | JwtPayload;
 }
 
-export const createCapsule = async (req: RequestWithUser, res: Response) => {
+export const createCapsule = async (req: Request, res: Response) => {
   try {
-    const capsule = req.body;
+    const request = req as RequestWithUser;
+    const capsule = request.body;
     const requestValidation = createCapsuleSchema.safeParse(capsule);
 
     if (requestValidation.success) {
-      const user = await userModel.findOne({ email: req.userEmail });
+      const user = await userModel.findOne({ email: request.userEmail });
       if (!user) {
         res.status(500).json({
           success: false,

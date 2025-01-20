@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
 import { cloudinaryUpload } from "../utils/cloudUpload";
 import { RequestWithUser } from "./createCapsule";
-import { user, userModel } from "../models/user";
+import {  userModel } from "../models/user";
 
-export const uploadFile = async (req: RequestWithUser, res: Response) => {
+export const uploadFile = async (req: Request, res: Response) => {
   try {
-    const fileName = req.file?.originalname;
+    const request = req as RequestWithUser;
+    const fileName = request.file?.originalname; 
     if (fileName) {
-      const existingUser = await userModel.findOne({ email: req.userEmail });
+      const existingUser = await userModel.findOne({ email: request.userEmail });
       if (existingUser) {
         if (!existingUser.encryptionStarted) {
           existingUser.encryptionStarted = true;
@@ -16,7 +17,7 @@ export const uploadFile = async (req: RequestWithUser, res: Response) => {
         if (response?.success) {
           res.status(200).json({
             message: "file Uploaded successfully",
-            fileDeatils: req.file,
+            fileDeatils: request.file,
             success: true,
             fileUrl: response.data,
           });

@@ -17,7 +17,7 @@ router.post(
   "/upload",
   authenticate as express.RequestHandler,
   upload.single("file"),
-  uploadFile
+uploadFile
 );
 
 export default router;
