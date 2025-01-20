@@ -4,6 +4,7 @@ export interface user {
   name: string;
   email: string;
   password: string;
+  encryptionStarted:boolean
 }
 
 const userSchema: Schema<user> = new Schema({
@@ -16,7 +17,10 @@ const userSchema: Schema<user> = new Schema({
   password: {
     type: String,
     required: true,
-  },
+  },encryptionStarted:{
+    type:Boolean,
+    default:false
+  }
 });
 
 export const userModel = mongoose.model("User", userSchema);

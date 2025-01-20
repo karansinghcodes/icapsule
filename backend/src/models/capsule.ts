@@ -15,6 +15,7 @@ interface capsule {
     },
   ];
   createdAt: Date;
+ 
 }
 
 const capsuleSchema: Schema<capsule> = new Schema({
@@ -41,7 +42,7 @@ const capsuleSchema: Schema<capsule> = new Schema({
       fileType: String,
       fileName: String,
     },
-  ],
+  ]
 });
 
 export const capsuleModel = mongoose.model("Capule", capsuleSchema);
