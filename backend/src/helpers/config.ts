@@ -1,10 +1,10 @@
 import dotenv from "dotenv";
 import path from "path";
 
-// Load environment variables from the .env file
+
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
-// Extract environment variables with proper type assertions
+
 export const saltRounds: number = parseInt(process.env.SALTROUNDS || "10", 10);
 export const secretKey: string = process.env.JWTSECRETKEY || "";
 export const mongodbPassword: string = process.env.MONGODBPASSWORD || "";
