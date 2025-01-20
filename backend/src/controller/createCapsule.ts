@@ -4,7 +4,6 @@ import { userModel } from "../models/user";
 import { capsuleModel } from "../models/capsule";
 import { JwtPayload } from "jsonwebtoken";
 
-
 export interface RequestWithUser extends Request {
   userEmail: string | JwtPayload;
 }
